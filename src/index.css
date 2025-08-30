@@ -2,13 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Medical AI Diagnosis System Design Tokens
+   Professional healthcare interface with trust-building colors
+   All colors MUST be HSL for consistency */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
+    /* Core medical theme */
+    --background: 210 40% 98%;
     --foreground: 222.2 84% 4.9%;
 
     --card: 0 0% 100%;
@@ -17,8 +18,9 @@ All colors MUST be HSL.
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Medical blue primary - trust and professionalism */
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 0 0% 100%;
 
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
@@ -29,12 +31,33 @@ All colors MUST be HSL.
     --accent: 210 40% 96.1%;
     --accent-foreground: 222.2 47.4% 11.2%;
 
+    /* Medical status colors */
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
+    
+    /* Medical success - healing green */
+    --success: 142.1 76.2% 36.3%;
+    --success-foreground: 355.7 100% 97.3%;
+    
+    /* Medical warning - caution orange */
+    --warning: 32.5 94.6% 43.7%;
+    --warning-foreground: 0 0% 100%;
+    
+    /* Medical info - diagnostic blue */
+    --info: 199.5 89.1% 48%;
+    --info-foreground: 0 0% 100%;
 
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --ring: 217.2 91.2% 59.8%;
+    
+    /* Medical gradients */
+    --gradient-medical: linear-gradient(135deg, hsl(217.2 91.2% 59.8%) 0%, hsl(199.5 89.1% 48%) 100%);
+    --gradient-diagnosis: linear-gradient(135deg, hsl(142.1 76.2% 36.3%) 0%, hsl(217.2 91.2% 59.8%) 100%);
+    
+    /* Medical shadows */
+    --shadow-medical: 0 4px 20px -2px hsl(217.2 91.2% 59.8% / 0.1);
+    --shadow-card: 0 2px 10px -2px hsl(222.2 84% 4.9% / 0.1);
 
     --radius: 0.5rem;
 
@@ -56,6 +79,7 @@ All colors MUST be HSL.
   }
 
   .dark {
+    /* Dark mode medical theme */
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
 
@@ -65,7 +89,7 @@ All colors MUST be HSL.
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 210 40% 98%;
+    --primary: 217.2 91.2% 59.8%;
     --primary-foreground: 222.2 47.4% 11.2%;
 
     --secondary: 217.2 32.6% 17.5%;
@@ -77,8 +101,18 @@ All colors MUST be HSL.
     --accent: 217.2 32.6% 17.5%;
     --accent-foreground: 210 40% 98%;
 
+    /* Dark mode medical status colors */
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
+    
+    --success: 142.1 70.6% 45.3%;
+    --success-foreground: 355.7 100% 97.3%;
+    
+    --warning: 32.5 94.6% 43.7%;
+    --warning-foreground: 0 0% 100%;
+    
+    --info: 199.5 89.1% 48%;
+    --info-foreground: 0 0% 100%;
 
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
