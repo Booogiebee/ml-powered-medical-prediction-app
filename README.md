@@ -1,69 +1,148 @@
-# Welcome to your Lovable project
+# MediPredict - AI Disease Diagnosis System
 
-## Project info
+A production-ready web application that uses machine learning to predict common diseases (malaria, typhoid, influenza) from patient-reported symptoms and vital signs.
 
-**URL**: https://lovable.dev/projects/e29a24de-fa62-49c8-8c47-8fe0fb168c7f
+## 🚀 Features
 
-## How can I edit this code?
+- **AI-Powered Predictions**: Calibrated multiclass classification with probability scores and confidence intervals
+- **Role-Based Authentication**: Secure access for Patients, Doctors, and Administrators
+- **Comprehensive UI**: Responsive design with clinical-grade accessibility
+- **PDF Reports**: Professional medical reports with disclaimers and recommendations
+- **RESTful API**: OpenAPI-documented endpoints with rate limiting
+- **Patient Management**: Complete visit history and timeline tracking
 
-There are several ways of editing your application.
+## 🛠 Tech Stack
 
-**Use Lovable**
+- **Frontend**: Next.js 14, TypeScript, Tailwind CSS, shadcn/ui
+- **Backend**: Next.js API Routes, NextAuth.js
+- **Database**: PostgreSQL with Prisma ORM
+- **ML Model**: JavaScript implementation with probability calibration
+- **PDF Generation**: jsPDF with html2canvas
+- **State Management**: React Query (TanStack Query)
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/e29a24de-fa62-49c8-8c47-8fe0fb168c7f) and start prompting.
+## 📋 Prerequisites
 
-Changes made via Lovable will be committed automatically to this repo.
+- Node.js 18+ 
+- PostgreSQL database
+- npm or yarn package manager
 
-**Use your preferred IDE**
+## 🚀 Quick Start
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+1. **Clone and Install**
+   ```bash
+   npm install
+   ```
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+2. **Environment Setup**
+   ```bash
+   cp .env.example .env
+   # Edit .env with your database credentials and secrets
+   ```
 
-Follow these steps:
+3. **Database Setup**
+   ```bash
+   npx prisma migrate dev
+   npx prisma db seed
+   ```
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+4. **Start Development Server**
+   ```bash
+   npm run dev
+   ```
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+Visit http://localhost:3000 to access the application.
 
-# Step 3: Install the necessary dependencies.
-npm i
+## 🔐 Demo Accounts
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+- **Doctor**: doctor@demo.com / password123
+- **Patient**: patient@demo.com / password123
+- **Admin**: admin@demo.com / password123
+
+## 📊 API Documentation
+
+### Prediction Endpoint
+
+```http
+POST /api/predict
+Authorization: Bearer <jwt-token>
+Content-Type: application/json
+
+{
+  "age": 30,
+  "sex": "female",
+  "temperatureC": 38.5,
+  "heartRate": 95,
+  "symptoms": ["fever", "headache", "muscle aches"],
+  "durationDays": 3,
+  "travelHistory": false,
+  "notes": "Patient reports feeling weak"
+}
 ```
 
-**Edit a file directly in GitHub**
+### Response Format
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+```json
+{
+  "ranked": [
+    {
+      "label": "influenza",
+      "probability": 0.72,
+      "ci95": [0.65, 0.79]
+    }
+  ],
+  "calibrated": true,
+  "confidence": 0.85,
+  "explanation": [
+    {
+      "feature": "High temperature (38.5°C)",
+      "contribution": 0.3
+    }
+  ],
+  "modelVersion": "1.0.0"
+}
+```
 
-**Use GitHub Codespaces**
+## 🏥 Medical Safety
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+This application includes comprehensive medical disclaimers and safety measures:
 
-## What technologies are used for this project?
+- Clear educational-only disclaimers on all diagnostic outputs
+- Confidence thresholds with low-confidence warnings
+- Emergency contact recommendations for severe symptoms
+- Professional medical consultation advisories
 
-This project is built with:
+## 🔒 Security Features
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+- JWT-based authentication with role-based access control
+- Input validation and sanitization
+- Rate limiting on API endpoints
+- HTTPS enforcement
+- Audit logging for all predictions
 
-## How can I deploy this project?
+## 📱 Accessibility
 
-Simply open [Lovable](https://lovable.dev/projects/e29a24de-fa62-49c8-8c47-8fe0fb168c7f) and click on Share -> Publish.
+- WCAG 2.1 AA compliant
+- Keyboard navigation support
+- Screen reader optimization
+- High contrast color schemes
+- Focus management and ARIA labels
 
+## 🎯 Model Performance
+
+The ML model provides:
+- Multiclass classification for 4 conditions
+- Probability calibration for reliable confidence scores
+- Bootstrap confidence intervals
+- Feature importance explanations
+- Performance metrics tracking
+
+## 📄 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## ⚠️ Disclaimer
+
+This application is for educational and research purposes only. It is not intended to replace professional medical diagnosis or treatment. Always consult qualified healthcare professionals for medical decisions.
 ## Can I connect a custom domain to my Lovable project?
 
 Yes, you can!
