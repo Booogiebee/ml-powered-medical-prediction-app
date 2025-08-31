@@ -178,26 +178,45 @@ function calculateBayesianProbability(
 ): number {
   const priorProbability = diseaseData.baseRate;
   
-  // Calculate likelihood of symptoms given disease
-  let likelihood = 1.0;
+  // Calculate symptom matching score
+  const keySymptoms = diseaseData.keySymptoms;
   const allSymptoms = Object.keys(diseaseData.symptoms);
   
-  // For each possible symptom
-  for (const symptom of allSymptoms) {
-    const symptomProbGivenDisease = diseaseData.symptoms[symptom as keyof typeof diseaseData.symptoms] || 0.01;
-    const symptomProbGivenNotDisease = 0.1; // Base rate assumption
+  // Count matching symptoms with weighted importance
+  let matchScore = 0;
+  let totalWeight = 0;
+  
+  // Weight key symptoms more heavily
+  for (const symptom of keySymptoms) {
+    const weight = 2.0; // Key symptoms are more important
+    totalWeight += weight;
     
     if (patientSymptoms.includes(symptom)) {
-      likelihood *= symptomProbGivenDisease;
-    } else {
-      likelihood *= (1 - symptomProbGivenDisease);
+      const symptomProb = diseaseData.symptoms[symptom as keyof typeof diseaseData.symptoms] || 0.5;
+      matchScore += weight * symptomProb;
     }
   }
   
-  // Simple Bayesian calculation (not normalized across all diseases)
-  const posterior = likelihood * priorProbability;
+  // Add other symptoms with lower weight
+  for (const symptom of allSymptoms) {
+    if (!keySymptoms.includes(symptom)) {
+      const weight = 0.5; // Non-key symptoms have lower weight
+      totalWeight += weight;
+      
+      if (patientSymptoms.includes(symptom)) {
+        const symptomProb = diseaseData.symptoms[symptom as keyof typeof diseaseData.symptoms] || 0.3;
+        matchScore += weight * symptomProb;
+      }
+    }
+  }
   
-  return Math.min(posterior * 5, 1.0); // Scale and cap at 1.0
+  // Calculate normalized match ratio
+  const matchRatio = totalWeight > 0 ? matchScore / totalWeight : 0;
+  
+  // Combine with prior probability using weighted average
+  const probability = (matchRatio * 0.7) + (priorProbability * 0.3);
+  
+  return Math.min(probability, 1.0);
 }
 
 /**
