@@ -136,6 +136,43 @@ The ML model provides:
 - Feature importance explanations
 - Performance metrics tracking
 
+ ## 🧠 ML Classification Overview
+
+The machine learning classification logic is implemented in [`src/services/diagnosticEngine.ts`](src/services/diagnosticEngine.ts). It uses a Naive Bayes-inspired multiclass classifier to predict diseases based on patient symptoms and metadata.
+
+### 🔍 Core Components
+
+1. **Feature Engineering & Symptom Matching** *(Lines 45–65)*  
+   Converts patient symptoms into numerical features and scores them against disease profiles.
+
+2. **Bayesian Prior Probability Calculation** *(Lines 67–85)*  
+   Adjusts base disease probabilities using patient demographics and vital signs.
+
+3. **Uncertainty Quantification** *(Lines 87–118)*  
+   Estimates model confidence using statistical and information-theoretic metrics.
+
+4. **Main Classification Algorithm** *(Lines 120–165)*  
+   - Computes posterior probabilities for all diseases  
+   - Ranks diseases by likelihood  
+   - Outputs confidence scores for each prediction
+
+### 🧪 Algorithm Details
+
+- Naive Bayes-inspired multiclass classifier  
+- Supervised learning with labeled disease-symptom associations  
+- Probabilistic outputs for clinical decision support  
+- Feature weighting for symptom relevance  
+- Uncertainty quantification included  
+- Hybrid architecture supporting external ML APIs
+
+### 🔐 API Key Integration
+
+No API key is required for the local model.  
+To integrate external ML services, set the following in your `.env` file:
+
+```env
+VITE_ML_API_KEY=your_api_key_here
+
 ## 📄 License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
@@ -143,10 +180,3 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## ⚠️ Disclaimer
 
 This application is for educational and research purposes only. It is not intended to replace professional medical diagnosis or treatment. Always consult qualified healthcare professionals for medical decisions.
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
