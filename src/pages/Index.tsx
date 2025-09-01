@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { Link } from "react-router-dom";
 import { 
   Stethoscope, 
@@ -54,6 +55,11 @@ const Index = () => {
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5">
       {/* Header */}
       <div className="container mx-auto px-4 py-16 max-w-6xl">
+        
+        {/* Theme Toggle */}
+        <div className="flex justify-end mb-8">
+          <ThemeToggle />
+        </div>
         
         {/* Hero Section */}
         <div className="text-center mb-16">
