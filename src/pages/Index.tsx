@@ -3,6 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { Link } from "react-router-dom";
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/clerk-react";
 import { 
   Stethoscope, 
   Brain, 
@@ -56,8 +57,13 @@ const Index = () => {
       {/* Header */}
       <div className="container mx-auto px-4 py-16 max-w-6xl">
         
-        {/* Theme Toggle */}
-        <div className="flex justify-end mb-8">
+        {/* Header Controls */}
+        <div className="flex justify-between items-center mb-8">
+          <div className="flex items-center gap-4">
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
+          </div>
           <ThemeToggle />
         </div>
         
@@ -79,13 +85,24 @@ const Index = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-            <Link to="/diagnosis">
-              <Button size="lg" className="h-14 px-8 text-lg font-medium">
-                <Brain className="h-5 w-5 mr-2" />
-                Start AI Diagnosis
-                <ArrowRight className="h-5 w-5 ml-2" />
-              </Button>
-            </Link>
+            <SignedIn>
+              <Link to="/diagnosis">
+                <Button size="lg" className="h-14 px-8 text-lg font-medium">
+                  <Brain className="h-5 w-5 mr-2" />
+                  Start AI Diagnosis
+                  <ArrowRight className="h-5 w-5 ml-2" />
+                </Button>
+              </Link>
+            </SignedIn>
+            <SignedOut>
+              <SignInButton>
+                <Button size="lg" className="h-14 px-8 text-lg font-medium">
+                  <Brain className="h-5 w-5 mr-2" />
+                  Sign In to Start
+                  <ArrowRight className="h-5 w-5 ml-2" />
+                </Button>
+              </SignInButton>
+            </SignedOut>
             
             <Button variant="outline" size="lg" className="h-14 px-8 text-lg" asChild>
               <a href="#features">
@@ -248,13 +265,24 @@ const Index = () => {
                 Always consult healthcare professionals for proper medical care.
               </p>
               
-              <Link to="/diagnosis">
-                <Button size="lg" className="h-14 px-12 text-lg font-medium">
-                  <Stethoscope className="h-5 w-5 mr-2" />
-                  Start Free AI Diagnosis
-                  <ArrowRight className="h-5 w-5 ml-2" />
-                </Button>
-              </Link>
+              <SignedIn>
+                <Link to="/diagnosis">
+                  <Button size="lg" className="h-14 px-12 text-lg font-medium">
+                    <Stethoscope className="h-5 w-5 mr-2" />
+                    Start Free AI Diagnosis
+                    <ArrowRight className="h-5 w-5 ml-2" />
+                  </Button>
+                </Link>
+              </SignedIn>
+              <SignedOut>
+                <SignInButton>
+                  <Button size="lg" className="h-14 px-12 text-lg font-medium">
+                    <Stethoscope className="h-5 w-5 mr-2" />
+                    Sign In to Start
+                    <ArrowRight className="h-5 w-5 ml-2" />
+                  </Button>
+                </SignInButton>
+              </SignedOut>
 
               <p className="text-sm text-muted-foreground mt-4">
                 No registration required • Free to use • Privacy protected

@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { UserButton } from "@clerk/clerk-react";
 import { 
   Stethoscope, 
   Brain, 
@@ -107,8 +108,9 @@ export default function Diagnosis() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5">
       <div className="container mx-auto px-4 py-8 max-w-7xl">
-        {/* Theme Toggle */}
-        <div className="flex justify-end mb-4">
+        {/* Header Controls */}
+        <div className="flex justify-between items-center mb-4">
+          <UserButton />
           <ThemeToggle />
         </div>
         
